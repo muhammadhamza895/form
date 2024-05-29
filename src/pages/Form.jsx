@@ -50,6 +50,14 @@ const Form = () => {
 
     const handleSubmit = useCallback(() => {
         for (const property in inputData) {
+            if (property == 'email') {
+                const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                console.log(inputData[property].match(emailRegex))
+                if (!inputData[property].match(emailRegex)) {
+                    toast.error("Invalid E-mail")
+                    return
+                }
+            }
             if (inputData[property] == '') {
                 toast.error("Please fill al the fields")
                 return
